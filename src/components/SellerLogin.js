@@ -57,7 +57,7 @@ function SellerLogin() {
           setLoader(false);
           if (res.data._id) {
             localStorage.clear()
-            localStorage.setItem('admin', JSON.stringify(res.data));
+            localStorage.setItem('seller', JSON.stringify(res.data));
             navigate('/invalidusers');
           } else {
             alert("Invalid Details")

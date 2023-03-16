@@ -31,6 +31,7 @@ import Footer from './components/Footer';
 import SellerOtp from './components/SellerOtp';
 import SellerDashboard from './components/SellerDashboard';
 import AddImage from './components/AddImage';
+import BuyProduct from './components/BuyProduct';
 
 function App() {
   return (
@@ -65,8 +66,8 @@ function App() {
         <Route path='/bookingsuccessful' element={<><BookingSuccessful/></>}></Route>
         <Route path='/sellerdashboard/:id' element={<><SellerDashboard/></>}></Route>
         <Route path='/addimage' element={<><AddImage/></>}></Route>
-
-        <Route path='/productdetails' element={<><ProductDetails/></>}></Route>
+        <Route path='/productdetails/:id' element={<><ProductDetails/></>}></Route>
+        <Route path='/buyproduct/:id' element={<><BuyProduct/></>}></Route>
 
 
         <Route path='/viewusers' element={<><h1>View Users</h1><h1>View Users</h1></>}></Route>

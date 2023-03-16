@@ -1,52 +1,6 @@
-.heading{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-}
 
-/* .heading_container{
-    background-color: grey;
-} */
 
-.blank_space{
-    height: 4px;
-    background-color: grey;
-}
-
-.span_tag{
-    font-weight: 600;
-}
-
-.product_image{
-    display: flex;
-    flex-direction: row;
-    align-items: left;
-    padding: 30px;
-    margin: 10px;
-    margin-bottom: 20px;
-    height: 600px;
-    width: 600px;
-    border-width: 0.5;
-    border-radius: 4;
-}
-
-.buynowBtn{
-    margin-bottom: 10px;
-}
-
-.row{
-    display: flex;
-}
-
-.details{
-    margin-top: 60px;
-    display: flex;
-    align-items: left;
-    flex-direction: column;
-}
-
-@media screen and (max-width: 664px) {
+/* @media screen and (max-width: 664px) {
     .row{
         flex-direction: column;
     }
@@ -78,6 +32,6 @@
         flex-direction: column-reverse;
         margin-bottom: 10px;
     }
-}
+} */
 
 

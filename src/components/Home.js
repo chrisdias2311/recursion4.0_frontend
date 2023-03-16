@@ -111,8 +111,8 @@ function Home() {
 
 
     const ColorButton = styled(Button)(({ theme }) => ({
-        color: theme.palette.getContrastText(grey[900]),
-        backgroundColor: grey[900],
+        color: theme.palette.getContrastText(grey[800]),
+        backgroundColor: grey[800],
         '&:hover': {
             backgroundColor: grey[600],
         },
@@ -124,7 +124,7 @@ function Home() {
     return (
         <div>
             <div className="home_container">
-                <img className="home_image" src="https://thumbs.dreamstime.com/b/discount-background-black-friday-banner-internet-online-shopping-app-mobile-phone-white-gifts-red-bow-falling-experience-e-232655979.jpg"></img>
+                <img className="home_image" src="https://static.vecteezy.com/system/resources/thumbnails/002/006/774/small/paper-art-shopping-online-on-smartphone-and-new-buy-sale-promotion-backgroud-for-banner-market-ecommerce-free-vector.jpg"></img>
 
                 <div className="home_search">
                     <div className='home_search_bar'>

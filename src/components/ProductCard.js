@@ -23,6 +23,11 @@ function ProductCard({ id, ownerId, name, description, category, price, image, l
   const [userValidity, setUserValidity] = useState('');
 
 
+  const viewProductDetails = (id) => {
+    navigate('/productdetails/'+id)
+  }
+
+
 
   useEffect(() => {
     if (localStorage.getItem('user')) {
@@ -102,8 +107,8 @@ function ProductCard({ id, ownerId, name, description, category, price, image, l
   }
 
   return (
-    <div className="product">
-      <Card sx={{ maxWidth: 345, minWidth: 345 }}>
+    <div className="product" onClick={() => viewProductDetails(id)}>
+      <Card  onClick={() => viewProductDetails(id)} sx={{ maxWidth: 345, minWidth: 345 }}>
         <CardMedia
           component="img"
           height="200"
@@ -116,13 +121,15 @@ function ProductCard({ id, ownerId, name, description, category, price, image, l
             {name}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            <strong>Description: </strong>{description}
+            <strong>Description: </strong>{description.slice(0, 50)+"...."}
           </Typography>
+          <br></br>
           <Typography variant="body2" color="text.secondary">
             <strong>Category: </strong> {category}
           </Typography>
+          <br></br>
           <Typography component="div">
-            Price: ₹{price}
+            Price: ${price}
           </Typography>
         </CardContent>
       </Card>

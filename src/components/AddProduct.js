@@ -101,6 +101,7 @@ function AddProduct() {
             formdata.append('targetage', formData.targetage);
             formdata.append('targetgender', formData.targetgender);
             formdata.append('price', formData.price);
+            formdata.append('quantity', formData.quantity);
             formdata.append('file', formData.image);
 
             axios.post('http://localhost:5000/api/products/addproduct', formdata, {

@@ -10,6 +10,15 @@
     background-color: white;
     z-index: 1;
 }
+
+.product :hover{
+    cursor: pointer;
+}
+
+.footer-widget ul li a:hover {
+    color: var(--primary-color);
+}
+
 .product_info{
     height: 100px;
     margin-bottom: 15px;
