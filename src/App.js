@@ -26,6 +26,7 @@ import AccountUnderReviewPage from './components/AccountUnderReviewPage';
 import ForgotPassword from './components/ForgotPassword';
 import BookingSuccessful from './components/BookingSuccessful';
 import About from './components/About';
+import ProductDetails from './components/ProductDetails';
 import Footer from './components/Footer';
 
 function App() {
@@ -59,6 +60,8 @@ function App() {
         <Route path='/forgotpassword' element={<><ForgotPassword/></>}></Route>
         <Route path='/bookingsuccessful' element={<><BookingSuccessful/></>}></Route>
         <Route path='/sellerdashboard/:id' element={<><h1>Seller Dashboard</h1><h1>Seller Dashboard</h1></>}></Route>
+
+        <Route path='/productdetails' element={<><ProductDetails/></>}></Route>
 
 
         <Route path='/viewusers' element={<><h1>View Users</h1><h1>View Users</h1></>}></Route>=
