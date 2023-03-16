@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import { bgcolor } from '@mui/system';
 import './OtpValidation.css'
 
-function OtpValidation() {
+function SellerOtp() {
     const navigate = useNavigate();
 
     const [otp, setOtp] = useState('');
@@ -22,8 +22,8 @@ function OtpValidation() {
 
 
     const getOtp = () => {
-        const id = JSON.parse(localStorage.getItem('user')).email
-        axios.get(`https://recursion4-0-backend-server.onrender.com/api/user/generateotp/${id}`, {
+        const id = JSON.parse(localStorage.getItem('seller')).email
+        axios.get(`http://localhost:5000/api/seller/generateotp/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -36,17 +36,17 @@ function OtpValidation() {
 
 
     const submitOtp = () => {
-        const id = JSON.parse(localStorage.getItem('user')).email
+        const id = JSON.parse(localStorage.getItem('seller')).email
 
-        axios.get(`https://recursion4-0-backend-server.onrender.com/api/user/verifyotp/${id}/${otp}`, {
+        axios.get(`http://localhost:5000/api/seller/verifyotp/${id}/${otp}`, {
             headers: {
                 'Content-Type': 'application/json',
             },
         })
             .then(res => {
-                if (JSON.parse(localStorage.getItem('user'))) {
+                if (JSON.parse(localStorage.getItem('seller'))) {
                     console.log(res)
-                    navigate('/')
+                    navigate('/sellerdashboard/'+JSON.parse(localStorage.getItem('seller'))._id)
                 }
             })
             .catch(err => console.log(err));
@@ -74,7 +74,7 @@ function OtpValidation() {
                         <br></br>
                         <br></br>
                         <br></br>
-                        <h2>We sent an OTP to {JSON.parse(localStorage.getItem('user')).email}</h2>
+                        <h2>We sent an OTP to {JSON.parse(localStorage.getItem('seller')).email}</h2>
 
                         <TextField className='inputField' fullWidth id="outlined-basic" value={otp} onChange={handleOtpChange} label="Enter OTP" variant="outlined" />
                         <br></br>
@@ -92,4 +92,4 @@ function OtpValidation() {
     )
 }
 
-export default OtpValidation
+export default SellerOtp

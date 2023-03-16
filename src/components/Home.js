@@ -42,7 +42,7 @@ function Home() {
                     const formdata = new FormData()
                     formdata.append('userid', JSON.parse(localStorage.getItem('user'))._id);
 
-                    axios.post('https://uniexserver.onrender.com/api/transactions/userdetails', formdata, {
+                    axios.post('https://recursion4-0-backend-server.onrender.com/api/transactions/userdetails', formdata, {
                         headers: {
                             'Content-Type': 'application/json',
                         },
@@ -124,7 +124,7 @@ function Home() {
     return (
         <div>
             <div className="home_container">
-                <img className="home_image" src="https://static.vecteezy.com/system/resources/previews/003/512/368/non_2x/black-friday-super-sale-banner-horizontal-poster-with-black-balloons-on-dark-background-in-minimal-style-shopping-sale-discount-prices-illustration-with-realistic-elements-for-header-website-vector.jpg"></img>
+                <img className="home_image" src="https://www.shutterstock.com/image-vector/black-friday-sale-banner-gold-260nw-1523724872.jpg"></img>
 
                 <div className="home_search">
                     <div className='home_search_bar'>

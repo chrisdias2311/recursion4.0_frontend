@@ -188,7 +188,7 @@ function DrawerAppBar(props) {
                                 <ListItem disablePadding>
                                     <ListItemButton sx={{ textAlign: 'center', display: 'flex', flexDirection: 'column' }}>
                                         <ListItemText onClick={navigateToHome}>Home</ListItemText>
-                                        <ListItemText onClick={navigateToValidateUsers}>Add Product</ListItemText>    
+                                        <ListItemText onClick={navigateToAddProduct}>Add Product</ListItemText>    
                                         <ListItemText onClick={navigateToSellerDashboard}>Dashboard</ListItemText>
                                     </ListItemButton>
                                 </ListItem>
@@ -196,6 +196,7 @@ function DrawerAppBar(props) {
                                 <ListItem disablePadding>
                                     <ListItemButton sx={{ textAlign: 'center', display: 'flex', flexDirection: 'column' }}>
                                         <ListItemText onClick={logout}>Logout</ListItemText>
+                                        <ListItemText onClick={navigateToSellerLogin}>Sign-In as Seller</ListItemText>
                                         <ListItemText onClick={navigateToSignIn}>Sign-In as User</ListItemText>
                                         <ListItemText onClick={navigateToSignUp}>Sign-Up as User</ListItemText>
                                     </ListItemButton>
@@ -257,20 +258,19 @@ function DrawerAppBar(props) {
                     </Typography>
 
                     {
-                        (localStorage.getItem('user') || localStorage.getItem('admin')) ?
+                        (localStorage.getItem('user') || localStorage.getItem('seller')) ?
                             (
                                 localStorage.getItem('user') ?
                                     <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                                         <Button onClick={navigateToHome} sx={{ color: '#fff' }}>Home</Button>
                                         <Button onClick={navigateToAbout} sx={{ color: '#fff' }}>About</Button>
                                         <Button onClick={navigateToMyDashboard} sx={{ color: '#fff' }}>Dashboard</Button>
-                                        <Button onClick={navigateToAddProduct} sx={{ color: '#fff' }}>Add Product</Button>
                                     </Box>
                                     :
                                     <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                                         <Button onClick={navigateToHome} sx={{ color: '#fff' }}>Home</Button>
-                                        <Button onClick={navigateToValidateUsers} sx={{ color: '#fff' }}>Validate Users</Button>
-                                        <Button onClick={navigateToRegisterSeller} sx={{ color: '#fff', paddingLeft: 3 }}>Register Admin</Button>
+                                        <Button onClick={navigateToAddProduct} sx={{ color: '#fff' }}>Add Product</Button>
+                                        <Button onClick={navigateToSellerLogin} sx={{ color: '#fff' }}>Sign-In as Seller</Button>
                                     </Box>
                             )
                             :
@@ -285,7 +285,7 @@ function DrawerAppBar(props) {
                     }
 
                     {
-                        (localStorage.getItem('user') || localStorage.getItem('admin')) ?
+                        (localStorage.getItem('user') || localStorage.getItem('seller')) ?
                             (
                                 localStorage.getItem('user') ?
                                     <div>

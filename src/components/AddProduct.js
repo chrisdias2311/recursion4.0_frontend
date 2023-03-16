@@ -30,12 +30,10 @@ function AddProduct() {
 
 
     useEffect(() => {
-        if (JSON.parse(localStorage.getItem('user')).verified !== "Yes") {
+        if (JSON.parse(localStorage.getItem('seller')).verified !== "yes") {
             navigate("/404page");
         }
     }, []);
-
-
 
 
 
@@ -43,6 +41,8 @@ function AddProduct() {
         name: '',
         description: '',
         category: '',
+        targetgender:'',
+        targetage:'',
         price: '',
         image: '',
     });
@@ -59,6 +59,12 @@ function AddProduct() {
     }
     const handleCategoryChange = (event) => {
         setFormData({ ...formData, category: event.target.value });
+    }
+    const handleGenderChange = (event) => {
+        setFormData({ ...formData, targetgender: event.target.value });
+    }
+    const handleAgeChange = (event) => {
+        setFormData({ ...formData, targetage: event.target.value });
     }
     const handlePriceChange = (event) => {
         setFormData({ ...formData, price: event.target.value });
@@ -84,15 +90,16 @@ function AddProduct() {
             e.preventDefault();
 
             const formdata = new FormData();
-            formdata.append('ownerId', JSON.parse(localStorage.getItem('user'))._id);
+            formdata.append('ownerId', JSON.parse(localStorage.getItem('seller'))._id);
             formdata.append('name', formData.name);
             formdata.append('description', formData.description);
             formdata.append('category', formData.category);
+            formdata.append('targetage', formData.targetage);
+            formdata.append('targetgender', formData.targetgender);
             formdata.append('price', formData.price);
-            formdata.append('link', formData.link);
             formdata.append('file', formData.image);
 
-            axios.post('https://uniexserver.onrender.com/api/products/addproduct', formdata, {
+            axios.post('http://localhost:5000/api/products/addproduct', formdata, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -167,10 +174,48 @@ function AddProduct() {
                                     label="Select Category"
                                     onChange={handleCategoryChange}
                                 >
-                                    <MenuItem value={'Stationery and Equipments'}>Stationery & equipments</MenuItem>
-                                    <MenuItem value={'Notes & Study Material'}>Notes & Study Material</MenuItem>
-                                    <MenuItem value={'Previous Papers'}>Previous Papers</MenuItem>
-                                    <MenuItem value={'E-notes and Study Material'}>E-notes and Study Material</MenuItem>
+                                    <MenuItem value={'Electronics'}>Electronics</MenuItem>
+                                    <MenuItem value={'Mobiles & Laptops'}>Mobiles & Laptops</MenuItem>
+                                    <MenuItem value={'Home & Kitchen'}>Home & Kitchen</MenuItem>
+                                    <MenuItem value={'Fashion & clothing'}>Fashion & clothing</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </div>
+
+                        <br></br>
+
+                        <div className='inputfield'>
+                            <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">Select Target Audience Gender</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={formData.targetgender}
+                                    label="Select Target Audience Gender"
+                                    onChange={handleGenderChange}
+                                >
+                                    <MenuItem value={'Male'}>Male</MenuItem>
+                                    <MenuItem value={'Female'}>Female</MenuItem>
+                                    <MenuItem value={'N.A.'}>N.A.</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </div>
+
+                        <br></br>
+                        
+                        <div className='inputfield'>
+                            <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">Select Target Audience Age</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={formData.targetage}
+                                    label="Select Target Audience Age"
+                                    onChange={handleAgeChange}
+                                >
+                                    <MenuItem value={'Less than 18'}>Less than 18</MenuItem>
+                                    <MenuItem value={'18-30'}>18-30</MenuItem>
+                                    <MenuItem value={'Above 30'}>Above 30</MenuItem>
                                 </Select>
                             </FormControl>
                         </div>
@@ -182,10 +227,6 @@ function AddProduct() {
                         </div>
 
                         <br></br>
-
-                        <div className='inputField'>
-                            <TextField className='inputField' fullWidth id="outlined-basic" value={formData.link} onChange={handleLinkChange} label="Product Link" variant="outlined" />
-                        </div>
 
 
                         <h5>Upload Product Image (Only jpeg & png)</h5>

@@ -50,22 +50,30 @@ function UserLogin() {
             formdata.append('password', formData.password);
 
 
-            axios.post('https://uniexserver.onrender.com/api/user/login', formdata, {
+            axios.post('https://recursion4-0-backend-server.onrender.com/api/user/login', formdata, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
             })
                 .then(res => {
-                    setLoader(false);
-                    console.log(res)
-
-                    if (res.data.email) {
-                        setSuccess(true)
-                        localStorage.clear();
-                        localStorage.setItem('user', JSON.stringify(res.data));
-                        setSuccess(false)
-                        navigate('/')
+                    if(res.status===200){
+                        alert("Logged In successfully!")
+                        setLoader(false);
+                        console.log(res)
+    
+                        if (res.data.email) {
+                            setSuccess(true)
+                            localStorage.clear();
+                            localStorage.setItem('user', JSON.stringify(res.data));
+                            setSuccess(false)
+                            navigate('/')
+                        }
+                    }else{
+                        console.log(res);
+                        alert(res.data);
                     }
+
+
                 })
                 .catch(err => {
                     setError(true);

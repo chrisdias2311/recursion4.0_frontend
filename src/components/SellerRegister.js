@@ -43,7 +43,7 @@ function SellerRegister() {
 
 
 
-    const createAdmin = (e) => {
+    const createSeller = (e) => {
         e.preventDefault();
 
         if (formData.email !== '' && formData.firstName !== '' && formData.lastName !== '' && formData.phone !== '' && formData.password !== '') {
@@ -58,46 +58,58 @@ function SellerRegister() {
             formdata.append('phone', formData.phone);
             formdata.append('password', formData.password);
 
-            axios.post('https://uniexserver.onrender.com/api/user/register', formdata, {
+            axios.post('http://localhost:5000/api/seller/register', formdata, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
             })
                 .then(res => {
 
-                    localStorage.clear();
-                    localStorage.setItem('user', JSON.stringify(res.data));
+                    if (res.status === 200) {
+                        console.log(res);
 
-                    const verifyemail = JSON.parse(localStorage.getItem('user')).email
-                    formdata.append('verifyEmail', verifyemail);
+                        localStorage.clear();
+                        localStorage.setItem('seller', JSON.stringify(res.data));
 
-                    axios.post('https://uniexserver.onrender.com/api/user/getuser', formdata, {
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                    })
-                        .then(res => {
-                            if (res.data.email) {
-                                setError(false)
-                                setSuccess(true);
-                                localStorage.clear();
-                                localStorage.setItem('user', JSON.stringify(res.data));
-                                navigate('/validateotp/' + res.data._id)
-                            } else {
-                                setError(true)
-                                alert(res.response.data)
-                                alert("Error occurs here")
+                        const verifyemail = JSON.parse(localStorage.getItem('seller')).email
+                        console.log("This is the email", verifyemail)
+                        formdata.append('verifyEmail', verifyemail);
 
-                            }
+                        axios.post('http://localhost:5000/api/seller/getseller', formdata, {
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
                         })
-                        .catch(err => {
-                            setError(true)
-                            alert(err.response.data)
-                        });
+                            .then(res => {
+                                console.log(res)
+                                if(res.status===200){
+                                    if (res.data.email) {
+                                        setError(false)
+                                        setSuccess(true);
+                                        localStorage.clear();
+                                        localStorage.setItem('seller', JSON.stringify(res.data));
+                                        navigate('/validatesellerotp/' + res.data._id)
+                                    } else {
+                                        setError(true)
+                                        alert(res.response.data)
+                                        alert("Error occurs here")
+                                    }
+                                }else{
+                                    console.log("Error occured", res);
+                                }
+                                
+                            })
+                            .catch(err => {
+                                setError(true)
+                                console.log(err)
+                            });
+                    }else{
+                        console.log("Error Ocured", res)
+                    }
                 })
                 .catch(err => {
                     setError(true)
-                    alert(err.response.data)
+                    console.log(err)
                 });
         } else {
             setError(true)
@@ -136,7 +148,7 @@ function SellerRegister() {
                         </div>
                     </form>
 
-                    <Button variant="contained" onClick={createAdmin}>
+                    <Button variant="contained" onClick={createSeller}>
                         Create Account
                     </Button>
                 </div>

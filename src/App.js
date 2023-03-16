@@ -28,6 +28,8 @@ import BookingSuccessful from './components/BookingSuccessful';
 import About from './components/About';
 import ProductDetails from './components/ProductDetails';
 import Footer from './components/Footer';
+import SellerOtp from './components/SellerOtp';
+import SellerDashboard from './components/SellerDashboard';
 
 function App() {
   return (
@@ -52,6 +54,7 @@ function App() {
         <Route path='/dashboard/updateproduct/:id' element={<><UpdateProduct/></>}></Route>
         <Route path='/viewproduct/:id' element={<><ViewProduct/></>}></Route>
         <Route path='/validateotp/:id' element={<><OtpValidation/></>}></Route>
+        <Route path='/validatesellerotp/:id' element={<><SellerOtp/></>}></Route>
         <Route path='/profile/:id' element={<><Profile/></>}></Route>
         <Route path='/updateuserprofile' element={<><UpdateUserProfile/></>}></Route>
         <Route path='*' element={<><PageNotFound/></>}></Route>
@@ -59,12 +62,12 @@ function App() {
         <Route path='/accountunderreview' element={<><AccountUnderReviewPage/></>}></Route>
         <Route path='/forgotpassword' element={<><ForgotPassword/></>}></Route>
         <Route path='/bookingsuccessful' element={<><BookingSuccessful/></>}></Route>
-        <Route path='/sellerdashboard/:id' element={<><h1>Seller Dashboard</h1><h1>Seller Dashboard</h1></>}></Route>
+        <Route path='/sellerdashboard/:id' element={<><SellerDashboard/></>}></Route>
 
         <Route path='/productdetails' element={<><ProductDetails/></>}></Route>
 
 
-        <Route path='/viewusers' element={<><h1>View Users</h1><h1>View Users</h1></>}></Route>=
+        <Route path='/viewusers' element={<><h1>View Users</h1><h1>View Users</h1></>}></Route>
       
       </Routes>
       <Footer/>

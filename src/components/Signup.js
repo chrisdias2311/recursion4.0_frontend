@@ -22,7 +22,12 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+
 import LinearProgress from '@mui/material/LinearProgress';
+import { display } from '@mui/system';
 
 function Signup() {
     const gender = [
@@ -40,87 +45,11 @@ function Signup() {
         }
     ];
 
+    const handleElectronics = (event) => {
 
-    const year = [
-        {
-            value: 'FE',
-            label: 'FE',
-        },
-        {
-            value: 'SE',
-            label: 'SE',
-        },
-        {
-            value: 'TE',
-            label: 'TE',
-        },
-        {
-            value: 'BE',
-            label: 'BE',
-        },
-    ];
+    }
 
-    const dept = [
-        {
-            value: 'CMPN',
-            label: 'CMPN',
-        },
-        {
-            value: 'INFT',
-            label: 'INFT',
-        },
-        {
-            value: 'EXTC',
-            label: 'EXTC',
-        },
-        {
-            value: 'ELEC',
-            label: 'ELEC',
-        },
-        {
-            value: 'MECH',
-            label: 'MECH',
-        }
-    ];
 
-    const div = [
-        {
-            value: 'A',
-            label: 'A',
-        },
-        {
-            value: 'B',
-            label: 'B',
-        },
-        {
-            value: 'FE1',
-            label: 'FE1',
-        },
-        {
-            value: 'FE2',
-            label: 'FE2',
-        },
-        {
-            value: 'FE3',
-            label: 'FE3',
-        },
-        {
-            value: 'FE4',
-            label: 'FE4',
-        },
-        {
-            value: 'FE5',
-            label: 'FE5',
-        },
-        {
-            value: 'FE6',
-            label: 'FE6',
-        },
-        {
-            value: 'FE7',
-            label: 'FE7',
-        }
-    ];
 
     const navigate = useNavigate();
 
@@ -129,11 +58,10 @@ function Signup() {
         firstName: '',
         lastName: '',
         phone: '',
-        gender:'',
-        age:'',
-        interest:'',
+        gender: '',
+        age: '',
+        interest: '',
         password: '',
-
     });
     const imageData = new FormData();
     const [imageUpload, setImageUpload] = useState(false);
@@ -158,31 +86,15 @@ function Signup() {
     const handlePhoneChange = (event) => {
         setFormData({ ...formData, phone: event.target.value });
     }
-
-
     const handleGenderChange = (event) => {
         setFormData({ ...formData, gender: event.target.value })
     }
     const handleAgeChange = (event) => {
-        setFormData({ ...formData, age: event.target.value });
+        setFormData({ ...formData, age: event.target.value })
     }
-    const handleDeptChange = (event) => {
-        setFormData({ ...formData, dept: event.target.value })
-    }
-    const handleDivChange = (event) => {
-        setFormData({ ...formData, class: event.target.value })
-    }
-
 
     const handlePasswordChange = (event) => {
         setFormData({ ...formData, password: event.target.value });
-    }
-    const handleIdImageChange = async (event) => {
-        setFormData({ ...formData, image: event.target.files[0] });
-
-        imageData.append('file', formData.image);
-        console.log(formData.image.name);
-        setImageUpload(true);
     }
 
 
@@ -190,6 +102,7 @@ function Signup() {
     const submitSignupForm = (e) => {
         if (formData.email !== '' && formData.firstName !== '' && formData.lastName !== '' && formData.phone !== '' && formData.gender !== '' && formData.age !== '' && formData.password !== '') {
             setLoader(true)
+            console.log(formData)
 
             e.preventDefault();
 
@@ -202,20 +115,20 @@ function Signup() {
             formdata.append('age', formData.age);
             formdata.append('password', formData.password);
 
-            axios.post('https://uniexserver.onrender.com/api/user/register', formdata, {
+            axios.post('https://recursion4-0-backend-server.onrender.com/api/user/register', formdata, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
             })
                 .then(res => {
-                    
+
                     localStorage.clear();
                     localStorage.setItem('user', JSON.stringify(res.data));
 
                     const verifyemail = JSON.parse(localStorage.getItem('user')).email
                     formdata.append('verifyEmail', verifyemail);
 
-                    axios.post('https://uniexserver.onrender.com/api/user/getuser', formdata, {
+                    axios.post('https://recursion4-0-backend-server.onrender.com/api/user/getuser', formdata, {
                         headers: {
                             'Content-Type': 'application/json',
                         },
