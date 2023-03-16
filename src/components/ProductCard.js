@@ -124,46 +124,6 @@ function ProductCard({ id, ownerId, name, description, category, price, image, l
           <Typography component="div">
             Price: ₹{price}
           </Typography>
-
-          <CardActions>
-            {
-              userValidity === 'Yes' ?
-                <>
-                  {
-                    link ? <Button onClick={() => downloadProduct(id, ownerId, name)} href={link} variant="contained">Download</Button> : <Button onClick={askNotification} variant="contained">Book Now</Button>
-                  }
-                </>
-                :
-                <></>
-            }
-
-
-            <a className='link_tag' href={image} target="_blank" rel="noreferrer">
-              View Image
-            </a>
-          </CardActions>
-
-          {
-            userValidity !== 'Yes' ?
-            <div style={{color:'red'}}>Sign-in to Book / Download products</div>
-            :
-            <></>
-          }
-
-          {
-            notification ?
-              <div>
-                <Typography component="div">
-                  Are you sure you want to book this product?
-                </Typography>
-                <div>
-                  <Button sx={{ margin: 1 }} onClick={closeNotification} variant="contained">No</Button>
-                  <Button sx={{ margin: 1 }} onClick={() => bookProduct(id, ownerId, name)} variant="contained">Yes</Button>
-                </div>
-              </div>
-              :
-              <></>
-          }
         </CardContent>
       </Card>
     </div>

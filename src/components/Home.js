@@ -27,7 +27,7 @@ function Home() {
 
     useEffect(() => {
         axios
-            .get("https://uniexserver.onrender.com/api/products/allproducts")
+            .get("http://localhost:5000/api/products/allproducts")
             .then((response) => {
                 // dispatch(setInvalidUsers(response.data));
                 dispatch(setProducts(response.data))
@@ -124,7 +124,7 @@ function Home() {
     return (
         <div>
             <div className="home_container">
-                <img className="home_image" src="https://www.shutterstock.com/image-vector/black-friday-sale-banner-gold-260nw-1523724872.jpg"></img>
+                <img className="home_image" src="https://thumbs.dreamstime.com/b/discount-background-black-friday-banner-internet-online-shopping-app-mobile-phone-white-gifts-red-bow-falling-experience-e-232655979.jpg"></img>
 
                 <div className="home_search">
                     <div className='home_search_bar'>

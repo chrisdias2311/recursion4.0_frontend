@@ -44,6 +44,7 @@ function AddProduct() {
         targetgender:'',
         targetage:'',
         price: '',
+        quantity:0,
         image: '',
     });
     const imageData = new FormData();
@@ -68,6 +69,9 @@ function AddProduct() {
     }
     const handlePriceChange = (event) => {
         setFormData({ ...formData, price: event.target.value });
+    }
+    const handleQuantityChange = (event) => {
+        setFormData({ ...formData, quantity: event.target.value });
     }
     const handleLinkChange = (event) => {
         setFormData({ ...formData, link: event.target.value })
@@ -112,13 +116,16 @@ function AddProduct() {
                     setFormData({ ...formData, price: '' });
                     setFormData({ ...formData, link: '' });
                     setFormData({ ...formData, image: '' });
+                    if(res.status===200){
+                        alert("Product Added succeddfully!")
+                        console.log(res)
+                    }
 
                     setSuccess(true)
                     setTimeout(() => {
                         setSuccess(false)
 
                     }, 2000);
-                    navigate('/dashboard')
                 })
                 .catch(err => {
                     setError(true)
@@ -162,6 +169,13 @@ function AddProduct() {
                                 maxRows={4}
                             />
                         </div>
+
+                        <br></br>
+
+                        <div className='inputField'>
+                            <TextField className='inputField' fullWidth id="outlined-basic" type="number" value={formData.quantity} onChange={handleQuantityChange} label="Product Quantity" variant="outlined" />
+                        </div>
+
                         <br></br>
 
                         <div className='inputfield'>

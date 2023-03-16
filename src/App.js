@@ -30,6 +30,7 @@ import ProductDetails from './components/ProductDetails';
 import Footer from './components/Footer';
 import SellerOtp from './components/SellerOtp';
 import SellerDashboard from './components/SellerDashboard';
+import AddImage from './components/AddImage';
 
 function App() {
   return (
@@ -63,6 +64,7 @@ function App() {
         <Route path='/forgotpassword' element={<><ForgotPassword/></>}></Route>
         <Route path='/bookingsuccessful' element={<><BookingSuccessful/></>}></Route>
         <Route path='/sellerdashboard/:id' element={<><SellerDashboard/></>}></Route>
+        <Route path='/addimage' element={<><AddImage/></>}></Route>
 
         <Route path='/productdetails' element={<><ProductDetails/></>}></Route>
 
