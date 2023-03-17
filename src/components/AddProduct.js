@@ -41,10 +41,10 @@ function AddProduct() {
         name: '',
         description: '',
         category: '',
-        targetgender:'',
-        targetage:'',
+        targetgender: '',
+        targetage: '',
         price: '',
-        quantity:0,
+        quantity: 0,
         image: '',
     });
     const imageData = new FormData();
@@ -117,7 +117,7 @@ function AddProduct() {
                     setFormData({ ...formData, price: '' });
                     setFormData({ ...formData, link: '' });
                     setFormData({ ...formData, image: '' });
-                    if(res.status===200){
+                    if (res.status === 200) {
                         alert("Product Added succeddfully!")
                         console.log(res)
                     }
@@ -217,7 +217,7 @@ function AddProduct() {
                         </div>
 
                         <br></br>
-                        
+
                         <div className='inputfield'>
                             <FormControl fullWidth>
                                 <InputLabel id="demo-simple-select-label">Select Target Audience Age</InputLabel>
