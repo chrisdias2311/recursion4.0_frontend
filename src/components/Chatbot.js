@@ -5,6 +5,7 @@ import { useState } from 'react';
 import '@tensorflow/tfjs';
 import * as qna from '@tensorflow-models/qna'
 import CloseIcon from '@mui/icons-material/Close';
+import SendIcon from '@mui/icons-material/Send';
 
 
 
@@ -39,13 +40,16 @@ export default function Chatbot() {
     return (
         <div sx={{ display: 'flex', float: 'right' }}>
             <Paper sx={{
-                Height: '200px', Width: '200px', position: 'fixed', bottom: 10, right: 10, zIndex: 1
+                Height: '200px', Width: '200px', borderRadius: 2, position: 'fixed', bottom: 10, right: 10, zIndex: 1, alignItems: 'center'
             }}>
-                <Box sx={{ minHeight: '50px', bgcolor: 'lightgrey', justifyContent: 'center', display: 'flex', }}>
-                    <Typography align='center' sx={{ justifyContent: 'center' }}>{reply}</Typography></Box>
+                <Box sx={{ minHeight: '50px', justifyContent: 'center', display: 'flex', borderRadius: 2, padding: 2 }}>
+                    <Typography align='center' sx={{ justifyContent: 'center' }}>{reply}</Typography>
+                </Box>
 
-                <TextField onChange={changeData} > </TextField>
-                <Button onClick={chat}>enter</Button>
+                <div style={{display: 'flex'}}>
+                    <TextField id="outlined-basic" label="Chat" variant="outlined" onChange={changeData} > </TextField>
+                    <Button onClick={chat} variant="contained" endIcon={<SendIcon />}></Button>
+                </div>
 
             </Paper >
         </div >
