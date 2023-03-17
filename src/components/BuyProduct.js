@@ -12,11 +12,14 @@ import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import Typography from '@mui/material/Typography';
+import { useEffect } from 'react';
 
 function BuyProduct() {
     const navigate = useNavigate();
     const params = useParams();
     const [location, setLocation] = useState('');
+    const [product, setProduct] = useState([]);
 
     const ColorButton = styled(Button)(({ theme }) => ({
         color: theme.palette.getContrastText(grey[900]),
@@ -25,6 +28,26 @@ function BuyProduct() {
             backgroundColor: grey[600],
         },
     }));
+
+    useEffect(() => {
+        console.log('Id: ', params.id)
+
+        const formdata = new FormData();
+        formdata.append('id', params.id);
+
+        axios.post('http://localhost:5000/api/products/productdetails', formdata, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then(res => {
+                console.log("The Product Data", res.data)
+                setProduct(res.data)
+            })
+            .catch(err =>
+                console.log("This is the error", err),
+            );
+    }, [])
 
 
     const handleLocationChange = (e) => {
@@ -45,7 +68,7 @@ function BuyProduct() {
             },
         })
             .then(res => {
-                if(res.status===200){
+                if (res.status === 200) {
                     alert("Order Placed successfully");
                     navigate('/dashboard')
                 }
@@ -61,6 +84,13 @@ function BuyProduct() {
         <div className='addproduct'>
             <div className='addproduct_container'>
                 <h1>Buy Product</h1>
+
+                <Typography variant="h5" component="div">
+                    {product.name}
+                </Typography>
+                <Typography variant="h6" color="text.secondary" gutterBottom>
+                    $ <strong>{product.price}</strong>
+                </Typography>
 
                 <div className='ap_form_and_button'>
                     <TextField className='inputField' fullWidth id="outlined-basic" value={location} onChange={handleLocationChange} label="Enter Location Link" variant="outlined" />
