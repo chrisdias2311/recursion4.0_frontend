@@ -33,6 +33,7 @@ import SellerDashboard from './components/SellerDashboard';
 import AddImage from './components/AddImage';
 import BuyProduct from './components/BuyProduct';
 import Chatbot from './components/Chatbot';
+import Payment from './components/Payment';
 
 function App() {
   return (

@@ -14,6 +14,7 @@ import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import { useEffect } from 'react';
+import Payment from './Payment';
 
 function BuyProduct() {
     const navigate = useNavigate();
@@ -95,9 +96,9 @@ function BuyProduct() {
                 <div className='ap_form_and_button'>
                     <TextField className='inputField' fullWidth id="outlined-basic" value={location} onChange={handleLocationChange} label="Enter Location Link" variant="outlined" />
                 </div>
-
+                <Payment />
                 <div className='button'>
-                    <ColorButton onClick={placeOrder} sx={{ maxWidth: 300, minWidth: 300, margin: 2, height: 45 }} variant="contained" className="buynowBtn">Place Order</ColorButton>
+                    <ColorButton onClick={placeOrder} sx={{ maxWidth: 300, minWidth: 300, margin: 2, height: 45 }} variant="contained" className="buynowBtn">Cash on Delivery</ColorButton>
                 </div>
 
 
