@@ -47,7 +47,7 @@ function SellerLogin() {
       formdata.append('pid', formData.pid);
       formdata.append('password', formData.password);
 
-      axios.post('https://uniexserver.onrender.com/api/admin/login', formdata, {
+      axios.post('http://localhost:5000/api/admin/login', formdata, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -83,7 +83,7 @@ function SellerLogin() {
             <LinearProgress /> : <></>
         }
 
-        <h1>Login as Admin</h1>
+        <h1>SignIn as Seller</h1>
 
         <div className='al_form_and_button'>
 

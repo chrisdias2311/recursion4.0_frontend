@@ -11,8 +11,10 @@ import { grey } from '@mui/material/colors';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function BuyProduct() {
+    const navigate = useNavigate();
     const params = useParams();
     const [location, setLocation] = useState('');
 
@@ -43,6 +45,10 @@ function BuyProduct() {
             },
         })
             .then(res => {
+                if(res.status===200){
+                    alert("Order Placed successfully");
+                    navigate('/dashboard')
+                }
                 console.log(res)
             })
             .catch(err =>

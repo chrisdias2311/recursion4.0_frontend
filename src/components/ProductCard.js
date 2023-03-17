@@ -118,7 +118,7 @@ function ProductCard({ id, ownerId, name, description, category, price, image, l
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {name}
+            {name.slice(0, 50)+"...."}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             <strong>Description: </strong>{description.slice(0, 50)+"...."}

@@ -19,7 +19,7 @@
     width: 100%;
     z-index: -1;
     margin-bottom: -350px;
-    /* mask-image: linear-gradient(to bottom, rgb(255, 0, 0), rgba(255, 255, 255, 0)); */
+    mask-image: linear-gradient(to bottom, rgb(255, 0, 0), rgba(255, 255, 255, 0));
     position: sticky;
 }
 

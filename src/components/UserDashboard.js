@@ -31,84 +31,45 @@ function UserDashboard() {
   const [transactionsButton, setTransactionsButton] = useState(false)
 
   useEffect(() => {
-    if (JSON.parse(localStorage.getItem('user'))._id) {
-
-      setUid(JSON.parse(localStorage.getItem('user'))._id)
-
-      const formdata = new FormData();
-      formdata.append('ownerId', JSON.parse(localStorage.getItem('user'))._id);
-
-      axios.post('https://uniexserver.onrender.com/api/products/myproducts', formdata, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-        .then(res => {
-          setAvailableProds(res.data)
-          dispatch(setAvailableProducts(res.data))
-        })
-        .catch(err =>
-          console.log("This is the error", err),
-        );
-    } else {
-      navigate('/userlogin')
-    }
-  }, [])
-
-  const available_products = data.userdashboard.availableproducts;
-
-  const getAvailableProducts = () => {
-    setAvalaibleProductsButton(true);
-    setBookedProductsButton(false);
-    setTransactionsButton(false);
-  }
-
-
-  const getBookedProducts = () => {
-    setAvalaibleProductsButton(false);
-    setBookedProductsButton(true);
-    setTransactionsButton(false);
-
     const formdata = new FormData();
-    formdata.append('id', JSON.parse(localStorage.getItem('user'))._id);
+    formdata.append('email', JSON.parse(localStorage.getItem('user')).email);
 
-    axios.post('https://uniexserver.onrender.com/api/transactions/soldproducts', formdata, {
+    axios.post('http://localhost:5000/api/user/gettransactions', formdata, {
       headers: {
         'Content-Type': 'application/json',
       },
     })
       .then(res => {
-        setBookedProds(res.data)
-        dispatch(setBookedProducts(res.data))
-      })
-      .catch(err =>
-        console.log("This is the error", err),
-      );
-  }
-
-  const getTransactions = () => {
-    setAvalaibleProductsButton(false);
-    setBookedProductsButton(false);
-    setTransactionsButton(true);
-
-
-    const formdata = new FormData();
-    formdata.append('id', JSON.parse(localStorage.getItem('user'))._id);
-
-    axios.post('https://uniexserver.onrender.com/api/transactions/mytransactions', formdata, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(res => {
+        console.log(res)
         setTrans(res.data)
         dispatch(setTransactions(res.data))
       })
       .catch(err =>
         console.log("This is the error", err),
       );
+  }, [])
 
-  }
+
+  // const getOrders = () => {
+
+  //   const formdata = new FormData();
+  //   formdata.append('email', JSON.parse(localStorage.getItem('user')).email);
+
+  //   axios.post('http://localhost:5000/api/user/gettransactions', formdata, {
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   })
+  //     .then(res => {
+  //       console.log(res)
+  //       setTrans(res.data)
+  //       dispatch(setTransactions(res.data))
+  //     })
+  //     .catch(err =>
+  //       console.log("This is the error", err),
+  //     );
+
+  // }
 
 
 
@@ -125,70 +86,30 @@ function UserDashboard() {
   return (
     <div>
       <h1>My Products</h1>
-      <div className='buttonsPanel'> 
-        <ColorButton sx={{ maxWidth: 300, minWidth: 300, margin: 2, height: 45 }} onClick={getBookedProducts} variant="contained">Your Orders</ColorButton>       {/*   which of my products wese sold? I have bought  */}
+      <div className='buttonsPanel'>
+        <ColorButton sx={{ maxWidth: 300, minWidth: 300, margin: 2, height: 45 }} variant="contained">Your Orders</ColorButton>       {/*   which of my products wese sold? I have bought  */}
       </div>
 
       <br></br>
 
-      {
-        availableProductsButton ?
-          <>
-            <h1>Your Products</h1>
-            <div className='available_products'>
+      <div>
 
-              {
-                available_products.length > 0 ? available_products.map((item, index) =>
-                  <AvailableProductCard
-                    id={item._id}
-                    ownerId={item.ownerId}
-                    name={item.name}
-                    description={item.description}
-                    category={item.category}
-                    price={item.price}
-                    image={item.productImage}
-                    link={item.link}
-                  />
-                ) : <h4>No products found</h4>
-              }
-            </div>
-          </>
-          :
-          (
-            bookedProductsButton ?
-              <div>
-                <h1>Booked Products</h1>
-                {
-                  bookedProds.length > 0 ? bookedProds.map((item, index) =>
-                    <BookedProductsCard
-                      transactionId={item._id}
-                      buyerName={item.buyerName}
-                      transactionType={item.transactionType}
-                      productName={item.productName}
-                      date={item.date}
-                    />
-                  ) : <h4>No transactions found</h4>
-                }
-              </div>
-              :
-              <div>
-                <h1>My Transactions</h1>
-
-                {
-                  trans.length > 0 ? trans.map((item, index) =>
-                    <TransactionCard
-                      transactionId={item._id}
-                      transactionType={item.transactionType}
-                      productName={item.productName}
-                      date={item.date}
-                    />
-                  ) : <h4>No transactions found</h4>
-                }
+        {
+          trans.length > 0 ? trans.map((item, index) =>
+            <TransactionCard
+              transactionId={item._id}
+              transactionType={item.transactionType}
+              productName={item.productName}
+              date={item.ordered}
+              delivery={item.arrival}
+              productId={item.productId}
+              status={item.status}
+            />
+          ) : <h4>No transactions found</h4>
+        }
 
 
-              </div>
-          )
-      }
+      </div>
 
 
       <br></br> <br></br> <br></br><br></br><br></br>

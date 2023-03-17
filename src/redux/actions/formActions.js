@@ -83,6 +83,46 @@ export const setEnotes = (products) => {
   }
 }
 
+
+
+
+
+export const setReccomended = (products) => {
+  return{
+    type: ActionTypes.SET_RECCOMENDED,
+    payload:products
+  }
+}
+export const setElectronics = (products) => {
+  return{
+    type: ActionTypes.SET_ELECTRONICS,
+    payload:products
+  }
+}
+export const setPhones = (products) => {
+  return{
+    type: ActionTypes.SET_PHONES,
+    payload:products
+  }
+}
+export const setHome = (products) => {
+  return{
+    type: ActionTypes.SET_HOME,
+    payload:products
+  }
+}
+export const setClothing = (products) => {
+  return{
+    type: ActionTypes.SET_CLOTHING,
+    payload:products
+  }
+}
+
+
+
+
+
+
 export const setAllProductsButton = () => {
   return{
     type: ActionTypes.SET_ALL_PRODUCTS_BUTTON
@@ -111,12 +151,78 @@ export const setPreviousPapersButton = () => {
 
 
 
+
+export const setReccomendedButton = () => {
+  return{
+    type: ActionTypes.SET_RECCOMENDED_BUTTON
+  }
+}
+export const setElectronicsButton = () => {
+  return{
+    type: ActionTypes.SET_ELECTRONICS_BUTTON
+  }
+}
+export const setPhonesButton = () => {
+  return{
+    type: ActionTypes.SET_PHONES_BUTTON
+  }
+}
+export const setHomeButton = () => {
+  return{
+    type: ActionTypes.SET_HOME_BUTTON
+  }
+}
+export const setClothingButton = () => {
+  return{
+    type: ActionTypes.SET_CLOTHING_BUTTON
+  }
+}
+
+
+
+
+
 export const searchAllProducts = (search) => {
   return{
     type: ActionTypes.SEARCH_ALL_PRODUCTS,
     payload:search
   }
 }
+export const searchReccoomended = (search) => {
+  return{
+    type: ActionTypes.SEARCH_RECCOMENDED,
+    payload:search
+  }
+}
+export const searchElectronics = (search) => {
+  return{
+    type: ActionTypes.SEARCH_ELECTRONICS,
+    payload:search
+  }
+}
+export const searchPhones = (search) => {
+  return{
+    type: ActionTypes.SEARCH_PHONES,
+    payload:search
+  }
+}
+export const searchHome = (search) => {
+  return{
+    type: ActionTypes.SEARCH_HOME,
+    payload:search
+  }
+}
+export const searchClothing = (search) => {
+  return{
+    type: ActionTypes.SEARCH_CLOTHING,
+    payload:search
+  }
+}
+
+
+
+
+
 export const searchStationery = (search) => {
   return{
     type: ActionTypes.SEARCH_STATIONERY,

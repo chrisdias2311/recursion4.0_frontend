@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import ProductCard from './ProductCard';
 import "./Home.css";
 import banner from './banner.jpg'
+import banner1 from '../Banner2.jpg'
 import { setProducts, setStationery, setNotes, setEnotes, setPreviousPapers, setAllProductsButton, setStationeryButton, setNotesButton, setEnotesButton, setPreviousPapersButton, searchAllProducts, searchStationery, searchNotes, searchPreviousPapers, searchEnotes } from '../redux/actions/formActions';
+
+import { setReccomended, setElectronics, setPhones, setHome, setClothing, setReccomendedButton, setElectronicsButton, setPhonesButton, setHomeButton, setClothingButton, searchReccoomended, searchElectronics, searchPhones, searchHome, searchClothing} from '../redux/actions/formActions';
 
 import axios from 'axios'
 
@@ -30,11 +33,18 @@ function Home() {
             .get("http://localhost:5000/api/products/allproducts")
             .then((response) => {
                 // dispatch(setInvalidUsers(response.data));
+                dispatch(setReccomended(response.data))
                 dispatch(setProducts(response.data))
                 dispatch(setStationery(response.data))
                 dispatch(setNotes(response.data))
                 dispatch(setPreviousPapers(response.data))
                 dispatch(setEnotes(response.data))
+
+                dispatch(setElectronics(response.data))
+                dispatch(setPhones(response.data))
+                dispatch(setHome(response.data))
+                dispatch(setClothing(response.data))
+
                 setAllProducts(response.data)
                 setLoader(false)
 
@@ -67,14 +77,16 @@ function Home() {
         setTextSearch(e.target.value)
         if (data.products.buttons.allProducts === true) {
             dispatch(searchAllProducts(e.target.value))
-        } else if (data.products.buttons.stationery) {
-            dispatch(searchStationery(e.target.value))
-        } else if (data.products.buttons.notes) {
-            dispatch(searchNotes(e.target.value))
-        } else if (data.products.buttons.previouspapers) {
-            dispatch(searchPreviousPapers(e.target.value))
-        } else if (data.products.buttons.enotes) {
-            dispatch(searchEnotes(e.target.value))
+        } else if (data.products.buttons.reccomended) {
+            dispatch(searchReccoomended(e.target.value))
+        } else if (data.products.buttons.electronics) {
+            dispatch(searchElectronics(e.target.value))
+        } else if (data.products.buttons.phones) {
+            dispatch(searchPhones(e.target.value))
+        } else if (data.products.buttons.home) {
+            dispatch(searchHome(e.target.value))
+        }else if(data.products.buttons.clothing){
+            dispatch(searchClothing(e.target.value))
         }
         setSearch(data.products.searchproducts)
     }
@@ -82,6 +94,7 @@ function Home() {
     const submitSearch = () => {
         if (textSearch !== '') {
             setAllProducts(search)
+            console.log(search)
         }
     }
 
@@ -92,6 +105,29 @@ function Home() {
         setAllProducts(data.products.allProducts);
         dispatch(setAllProductsButton())
     }
+    const reccomended = () => {
+        setAllProducts(data.products.reccomended);
+        dispatch(setReccomendedButton())
+    }
+    const electronics = () => {
+        setAllProducts(data.products.electronics);
+        dispatch(setElectronicsButton())
+    }
+    const phones = () => {
+        setAllProducts(data.products.phones);
+        dispatch(setPhonesButton())
+    }
+    const home = () => {
+        setAllProducts(data.products.home);
+        dispatch(setHomeButton())
+    }
+    const clothing = () => {
+        setAllProducts(data.products.clothing);
+        dispatch(setClothingButton())
+    }
+
+
+
     const stationery = () => {
         setAllProducts(data.products.stationery)
         dispatch(setStationeryButton());
@@ -110,11 +146,28 @@ function Home() {
     }
 
 
+    // const ColorButton = styled(Button)(({ theme }) => ({
+    //     color: theme.palette.getContrastText(grey[100]),
+    //     backgroundColor: grey[100],
+    //     '&:hover': {
+    //         backgroundColor: grey[400],
+    //     },
+    // }));
+
     const ColorButton = styled(Button)(({ theme }) => ({
-        color: theme.palette.getContrastText(grey[800]),
-        backgroundColor: grey[800],
+        color: theme.palette.getContrastText(grey[900]),
+        backgroundColor: grey[900],
         '&:hover': {
-            backgroundColor: grey[600],
+            backgroundColor: grey[700],
+        },
+    }));
+
+
+    const NewButton = styled(Button)(({ theme }) => ({
+        color: theme.palette.getContrastText(grey[900]),
+        backgroundColor: grey[900],
+        '&:hover': {
+            backgroundColor: grey[700],
         },
     }));
 
@@ -124,7 +177,7 @@ function Home() {
     return (
         <div>
             <div className="home_container">
-                <img className="home_image" src="https://static.vecteezy.com/system/resources/thumbnails/002/006/774/small/paper-art-shopping-online-on-smartphone-and-new-buy-sale-promotion-backgroud-for-banner-market-ecommerce-free-vector.jpg"></img>
+                <img className="home_image" src={banner1}></img>
 
                 <div className="home_search">
                     <div className='home_search_bar'>
@@ -139,16 +192,17 @@ function Home() {
                             </Stack>
                         </div>
 
-                        <ColorButton onClick={submitSearch} sx={{ maxWidth: 100, minWidth: 100, marginRight: 1, height: 40 }} variant="contained">Search</ColorButton>
+                        <NewButton onClick={submitSearch} sx={{ maxWidth: 100, minWidth: 100, marginRight: 1, height: 40 }} variant="contained">Search</NewButton>
                     </div>
                 </div>
 
                 <div className='buttonsPanel'>
                     <ColorButton onClick={allproducts} sx={{ maxWidth: 300, minWidth: 300, margin: 2, height: 45 }} variant="contained">All Products</ColorButton>
-                    <ColorButton onClick={stationery} sx={{ maxWidth: 300, minWidth: 300, margin: 2, height: 45 }} variant="contained">Stationery & Equipments</ColorButton>
-                    <ColorButton onClick={notes} sx={{ maxWidth: 300, minWidth: 300, margin: 2, height: 45 }} variant="contained">Notes & Study Material</ColorButton>
-                    <ColorButton onClick={previouspapers} sx={{ maxWidth: 300, minWidth: 300, margin: 2 }} variant="contained">Previous papers</ColorButton>
-                    <ColorButton onClick={enotes} sx={{ maxWidth: 300, minWidth: 300, margin: 2, height: 45 }} variant="contained">E-notes and Study Material</ColorButton>
+                    <ColorButton onClick={reccomended} sx={{ maxWidth: 300, minWidth: 300, margin: 2, height: 45 }} variant="contained">Reccomended</ColorButton>
+                    <ColorButton onClick={electronics} sx={{ maxWidth: 300, minWidth: 300, margin: 2, height: 45 }} variant="contained">Electronics</ColorButton>
+                    <ColorButton onClick={phones} sx={{ maxWidth: 300, minWidth: 300, margin: 2, height: 45 }} variant="contained">Phones & Laptops</ColorButton>
+                    <ColorButton onClick={home} sx={{ maxWidth: 300, minWidth: 300, margin: 2 }} variant="contained">Home & Kitchen</ColorButton>
+                    <ColorButton onClick={clothing} sx={{ maxWidth: 300, minWidth: 300, margin: 2, height: 45 }} variant="contained">Fashion & Clothing</ColorButton>
                 </div>
 
                 <br></br>

@@ -29,6 +29,7 @@ function SellerOtp() {
             },
         })
             .then(res => {
+                console.log(res)
                 setOtpPending(false)
             })
             .catch(err => console.log(err));
@@ -46,7 +47,7 @@ function SellerOtp() {
             .then(res => {
                 if (JSON.parse(localStorage.getItem('seller'))) {
                     console.log(res)
-                    navigate('/sellerdashboard/'+JSON.parse(localStorage.getItem('seller'))._id)
+                    navigate('/')
                 }
             })
             .catch(err => console.log(err));

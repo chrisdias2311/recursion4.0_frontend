@@ -30,9 +30,12 @@ function ProductDetails({ id, ownerId, name, description, category, price, image
 
 
   const buyProduct = () => {
-    if(JSON.parse(localStorage.getItem('user')).verified !== "yes"){
+    if(!localStorage.getItem('user')){
       alert("You need to Sign In to Buy a product")
-      navigate('/signup')
+      navigate('/userlogin')
+    }else if(JSON.parse(localStorage.getItem('user')).verified !== "yes"){
+      alert("You need to Sign In to Buy a product")
+      navigate('/userlogin')
     }else{
       navigate('/buyproduct/'+params.id)
     }

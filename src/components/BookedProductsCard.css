@@ -9,3 +9,22 @@
     margin-right: 15%;
 
 }
+.order_status_1 > img{
+    width: 3%;
+    margin-right: 10px;
+}
+
+.order_status_1{
+    display: flex;
+    justify-content: center;
+}
+.order_status_2 > img{
+    width: 4%;
+    margin-right: 10px;
+    align-items: center;
+}
+.order_status_2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

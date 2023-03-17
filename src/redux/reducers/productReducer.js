@@ -8,9 +8,23 @@ const initialState = {
     stationery: [],
     notes: [],
     enotes: [],
+
+    reccomended: [],
+    electronics:[],
+    phones:[],
+    home:[],
+    clothing:[],
+
+
     previouspapers: [],
     buttons: {
         allProducts: true,
+        reccomended: false,
+        electronics: false,
+        phones:false,
+        home:false,
+        clothing:false,
+
         stationery: false,
         notes: false,
         previouspapers: false,
@@ -44,21 +58,64 @@ export const productReducer = (state = initialState, { type, payload }) => {
             return { ...state, allProducts: state.allProducts.filter((item) => item._id !== payload), }
 
 
+        case ActionTypes.SET_RECCOMENDED:
+            console.log("Called from products reducer")
+            return {
+                ...state,
+                reccomended: state.allProducts.filter((item) =>
+                    (item.targetgender === JSON.parse(localStorage.getItem('user')).gender &&
+                    item.targetage === JSON.parse(localStorage.getItem('user')).age) ||
+                    item.targetgender === 'N.A.'
+                )
+            };
+        case ActionTypes.SET_ELECTRONICS:
+            console.log("Called from products reducer")
+            return { ...state, electronics: state.allProducts.filter((item) => item.category === "Electronics"), };
+        case ActionTypes.SET_PHONES:
+            console.log("Called from products reducer")
+            return { ...state, phones: state.allProducts.filter((item) => item.category === "Mobiles & Laptops"), };
+        case ActionTypes.SET_HOME:
+            console.log("Called from products reducer")
+            return { ...state, home: state.allProducts.filter((item) => item.category === "Home & Kitchen"), };
+        case ActionTypes.SET_CLOTHING:
+            console.log("Called from products reducer")
+            return { ...state, clothing: state.allProducts.filter((item) => item.category === "Fashion & clothing"), };
+
+
         case ActionTypes.SET_ALL_PRODUCTS_BUTTON:
             console.log("Called from products reducer")
-            return { ...state, buttons: { ...state.buttons, allProducts: true, stationery: false, notes: false, previouspapers: false, enotes: false } };
-        case ActionTypes.SET_STATIONERY_BUTTON:
+            return { ...state, buttons: { ...state.buttons, allProducts: true, reccomended: false, electronics: false, phones: false, home: false , clothing:false} };
+        case ActionTypes.SET_RECCOMENDED_BUTTON:
             console.log("Called from products reducer")
-            return { ...state, buttons: { ...state.buttons, allProducts: false, stationery: true, notes: false, previouspapers: false, enotes: false } };
-        case ActionTypes.SET_NOTES_BUTTON:
+            return { ...state, buttons: { ...state.buttons, allProducts: false, reccomended: true, electronics: false, phones: false, home: false , clothing:false} };
+        case ActionTypes.SET_ELECTRONICS_BUTTON:
             console.log("Called from products reducer")
-            return { ...state, buttons: { ...state.buttons, allProducts: false, stationery: false, notes: true, previouspapers: false, enotes: false } };
-        case ActionTypes.SET_PREVIOUS_PAPERS_BUTTON:
+            return { ...state, buttons: { ...state.buttons, allProducts: false, reccomended: false, electronics: true, phones: false, home: false , clothing:false} };
+        case ActionTypes.SET_PHONES_BUTTON:
             console.log("Called from products reducer")
-            return { ...state, buttons: { ...state.buttons, allProducts: false, stationery: false, notes: false, previouspapers: true, enotes: false } };
-        case ActionTypes.SET_ENOTES_BUTTON:
+            return { ...state, buttons: { ...state.buttons, allProducts: false, reccomended: false, electronics: false, phones: true, home: false , clothing:false} };
+        case ActionTypes.SET_HOME_BUTTON:
             console.log("Called from products reducer")
-            return { ...state, buttons: { ...state.buttons, allProducts: false, stationery: false, notes: false, previouspapers: false, enotes: true } };
+            return { ...state, buttons: { ...state.buttons, allProducts: false, reccomended: false, electronics: false, phones: false, home: true , clothing:false} };
+        case ActionTypes.SET_CLOTHING_BUTTON:
+            console.log("Called from products reducer")
+            return { ...state, buttons: { ...state.buttons, allProducts: false, reccomended: false, electronics: false, phones: false, home: false , clothing:true} };
+            
+        
+
+
+        // case ActionTypes.SET_STATIONERY_BUTTON:
+        //     console.log("Called from products reducer")
+        //     return { ...state, buttons: { ...state.buttons, allProducts: false, stationery: true, notes: false, previouspapers: false, enotes: false } };
+        // case ActionTypes.SET_NOTES_BUTTON:
+        //     console.log("Called from products reducer")
+        //     return { ...state, buttons: { ...state.buttons, allProducts: false, stationery: false, notes: true, previouspapers: false, enotes: false } };
+        // case ActionTypes.SET_PREVIOUS_PAPERS_BUTTON:
+        //     console.log("Called from products reducer")
+        //     return { ...state, buttons: { ...state.buttons, allProducts: false, stationery: false, notes: false, previouspapers: true, enotes: false } };
+        // case ActionTypes.SET_ENOTES_BUTTON:
+        //     console.log("Called from products reducer")
+        //     return { ...state, buttons: { ...state.buttons, allProducts: false, stationery: false, notes: false, previouspapers: false, enotes: true } };
 
 
         case ActionTypes.SEARCH_ALL_PRODUCTS:
@@ -66,6 +123,45 @@ export const productReducer = (state = initialState, { type, payload }) => {
                 ...state,
                 searchproducts: state.allProducts.filter((item) => item.description.toLowerCase().includes(payload.toLowerCase()) || item.name.toLowerCase().includes(payload.toLowerCase()) || item.category.toLowerCase().includes(payload.toLowerCase()))
             };
+        case ActionTypes.SEARCH_RECCOMENDED:
+            return {
+                ...state,
+                searchproducts: state.reccomended.filter((item) => item.description.toLowerCase().includes(payload.toLowerCase()) ||
+                    item.name.toLowerCase().includes(payload.toLowerCase()) ||
+                    item.category.toLowerCase().includes(payload.toLowerCase()))
+            };
+        case ActionTypes.SEARCH_ELECTRONICS:
+            return {
+                ...state,
+                searchproducts: state.electronics.filter((item) => item.description.toLowerCase().includes(payload.toLowerCase()) ||
+                    item.name.toLowerCase().includes(payload.toLowerCase()) ||
+                    item.category.toLowerCase().includes(payload.toLowerCase()))
+            };
+        case ActionTypes.SEARCH_PHONES:
+            return {
+                ...state,
+                searchproducts: state.phones.filter((item) => item.description.toLowerCase().includes(payload.toLowerCase()) ||
+                    item.name.toLowerCase().includes(payload.toLowerCase()) ||
+                    item.category.toLowerCase().includes(payload.toLowerCase()))
+            };
+        case ActionTypes.SEARCH_HOME:
+            return {
+                ...state,
+                searchproducts: state.home.filter((item) => item.description.toLowerCase().includes(payload.toLowerCase()) ||
+                    item.name.toLowerCase().includes(payload.toLowerCase()) ||
+                    item.category.toLowerCase().includes(payload.toLowerCase()))
+            };
+        case ActionTypes.SEARCH_CLOTHING:
+            return {
+                ...state,
+                searchproducts: state.clothing.filter((item) => item.description.toLowerCase().includes(payload.toLowerCase()) ||
+                    item.name.toLowerCase().includes(payload.toLowerCase()) ||
+                    item.category.toLowerCase().includes(payload.toLowerCase()))
+            };
+
+
+
+
         case ActionTypes.SEARCH_STATIONERY:
             return {
                 ...state,

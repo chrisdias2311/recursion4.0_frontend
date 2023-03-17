@@ -59,7 +59,7 @@ function Signup() {
         lastName: '',
         phone: '',
         gender: '',
-        age: '',
+        age: 0,
         interest: '',
         password: '',
     });
@@ -112,7 +112,14 @@ function Signup() {
             formdata.append('lastname', formData.lastName);
             formdata.append('phone', formData.phone);
             formdata.append('gender', formData.gender);
-            formdata.append('age', formData.age);
+
+            if(formData.age<18){
+                formdata.append('age', 'Less than 18');
+            }else if(formData.age<30){
+                formdata.append('age','18-30')
+            }else{
+                formdata.append('age','Above 30')
+            }
             formdata.append('password', formData.password);
 
             axios.post('https://recursion4-0-backend-server.onrender.com/api/user/register', formdata, {

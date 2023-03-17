@@ -20,6 +20,7 @@ import Logo from '../Logo.jpeg';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
+import Logo2 from '../logo2.png'
 
 
 
@@ -149,7 +150,7 @@ function DrawerAppBar(props) {
             <img
                 onClick={navigateToHome}
                 className="header_logo"
-                src={Logo}
+                src="https://www.logo.wine/a/logo/E-mart/E-mart-Logo.wine.svg"
             />
             <Divider />
 
@@ -253,7 +254,7 @@ function DrawerAppBar(props) {
                         <img
                             onClick={navigateToHome}
                             className="header_logo"
-                            src={Logo}
+                            src="https://www.logo.wine/a/logo/E-mart/E-mart-Logo.wine.svg"
                         />
                     </Typography>
 
@@ -263,7 +264,6 @@ function DrawerAppBar(props) {
                                 localStorage.getItem('user') ?
                                     <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                                         <Button onClick={navigateToHome} sx={{ color: '#fff' }}>Home</Button>
-                                        <Button onClick={navigateToAbout} sx={{ color: '#fff' }}>About</Button>
                                         <Button onClick={navigateToMyDashboard} sx={{ color: '#fff' }}>Dashboard</Button>
                                     </Box>
                                     :

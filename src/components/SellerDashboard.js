@@ -2,6 +2,10 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import axios from 'axios';
+import { Line } from 'react-chartjs-2';
+// import { makeStyles } from '@material-ui/core/styles';
+
+
 
 
 
@@ -12,7 +16,7 @@ function SellerDashboard() {
     useEffect(() => {
         if (!localStorage.getItem('seller')) {
             navigate('/404page');
-        }else if (JSON.parse(localStorage.getItem('seller')).email) {
+        } else if (JSON.parse(localStorage.getItem('seller')).email) {
             const formdata = new FormData()
             formdata.append('verifyEmail', JSON.parse(localStorage.getItem('seller')).email);
 
@@ -33,12 +37,12 @@ function SellerDashboard() {
 
 
 
+
     return (
         <div>
-            <br></br> <br></br> <br></br>
-            <h1>Seller Dashboard</h1>
+
         </div>
-    )
+    );
 }
 
-export default SellerDashboard
+export default SellerDashboard;
