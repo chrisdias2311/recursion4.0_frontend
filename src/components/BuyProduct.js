@@ -12,6 +12,7 @@ import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import Payment from './Payment';
 
 function BuyProduct() {
     const navigate = useNavigate();
@@ -45,7 +46,7 @@ function BuyProduct() {
             },
         })
             .then(res => {
-                if(res.status===200){
+                if (res.status === 200) {
                     alert("Order Placed successfully");
                     navigate('/dashboard')
                 }
@@ -65,9 +66,9 @@ function BuyProduct() {
                 <div className='ap_form_and_button'>
                     <TextField className='inputField' fullWidth id="outlined-basic" value={location} onChange={handleLocationChange} label="Enter Location Link" variant="outlined" />
                 </div>
-
+                <Payment />
                 <div className='button'>
-                    <ColorButton onClick={placeOrder} sx={{ maxWidth: 300, minWidth: 300, margin: 2, height: 45 }} variant="contained" className="buynowBtn">Place Order</ColorButton>
+                    <ColorButton onClick={placeOrder} sx={{ maxWidth: 300, minWidth: 300, margin: 2, height: 45 }} variant="contained" className="buynowBtn">Cash on Delivery</ColorButton>
                 </div>
 
 
